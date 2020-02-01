@@ -1,4 +1,8 @@
-﻿var ua = detect.parse(navigator.userAgent);
+﻿$(function() {
+    $("#container-termynal").removeClass("d-none");
+});
+
+var ua = detect.parse(navigator.userAgent);
 
 console.log(ua);
 
