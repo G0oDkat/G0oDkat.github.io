@@ -237,6 +237,7 @@ init = function () {
     let resize = function () {
         canvas.width = elemet.offsetWidth;
         canvas.height = elemet.offsetHeight;
+        blob.radius = Math.min(canvas.width, canvas.height, 1200) / 3;
     };
     window.addEventListener('resize', resize);
     resize();
