@@ -1,10 +1,26 @@
+/* Cascadia Mono, Microsoft's free terminal font, self-hosted so every device renders
+   the same glyphs. Phones' own monospace fonts lack the logo's ░▒▓█ characters and
+   break its grid. An installed copy (Windows 11) is used first and saves the download. */
+@font-face {
+    font-family: 'Cascadia Mono';
+    src: local('Cascadia Mono'), url('../fonts/CascadiaMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Cascadia Mono';
+    src: local('Cascadia Mono Bold'), url('../fonts/CascadiaMono-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
 :root {
     --bg: #05050a;
     --fg: #d2d2d6;
     --muted: #8a8a92;
     --prompt-user: #8ae234; /* Tango green and blue, as in Ubuntu's default prompt */
     --prompt-path: #729fcf;
-    --mono: Consolas, 'DejaVu Sans Mono', Menlo, 'Lucida Console', monospace;
+    --mono: 'Cascadia Mono', Consolas, monospace; /* Consolas only while the font loads */
     --gutter: 24px;
 }
 
@@ -138,9 +154,9 @@ a:focus-visible { text-decoration: underline; }
 }
 .line--dim,
 .prompt-login { opacity: .55; }
+/* block cursor filling the next character cell, like a real terminal */
 .line.is-typing::after {
-    content: '▋';
-    margin-left: .1em;
+    content: '█';
     animation: blink 1s steps(1) infinite;
 }
 

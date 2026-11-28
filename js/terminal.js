@@ -84,7 +84,7 @@ export class Terminal {
     async #type(line, prompt, { text, typeDelay = this.#options.typeDelay }) {
         const typed = span();
         line.append(...prompt, typed);
-        line.classList.add('is-typing');
+        line.classList.add('is-typing'); // shows the blinking cursor (CSS)
         await sleep(this.#options.promptPause);
         for (const char of text) {
             await sleep(typeDelay);
