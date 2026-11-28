@@ -1,0 +1,227 @@
+:root {
+    --bg: #05050a;
+    --fg: #d2d2d6;
+    --muted: #8a8a92;
+    --prompt-user: #8ae234; /* Tango green and blue, as in Ubuntu's default prompt */
+    --prompt-path: #729fcf;
+    --mono: Consolas, 'DejaVu Sans Mono', Menlo, 'Lucida Console', monospace;
+    --gutter: 24px;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    font-family: var(--mono);
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover,
+a:focus-visible { text-decoration: underline; }
+::selection { background: #c9c9c9; color: var(--bg); }
+
+/* The head script adds .intro; main.js removes it once the session has played. */
+.intro .profile,
+:root:not(.intro) .terminal { display: none; }
+
+/* ---------- backdrop ---------- */
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+.aurora {
+    --blur: 3.75vmax; /* relative, so small and large windows look alike (60px at 1600px) */
+    position: absolute;
+    inset: -10%;
+    filter: blur(var(--blur));
+    animation: hue-shift 18s ease-in-out infinite alternate;
+}
+
+/* colours from the magma colour map */
+.blob {
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    opacity: .55;
+    background: radial-gradient(circle, var(--color) 0%, transparent 65%);
+    animation: ease-in-out infinite alternate;
+}
+.blob-1 { --color: #721f81; left: 10%; top: 5%;    animation-name: drift-1; animation-duration: 22s; }
+.blob-2 { --color: #d3436e; right: 5%; bottom: 0;  animation-name: drift-2; animation-duration: 27s; }
+.blob-3 { --color: #fd9a6a; left: 35%; top: 30%;   animation-name: drift-3; animation-duration: 31s; }
+
+.dots,
+.vignette {
+    position: absolute;
+    inset: 0;
+}
+.dots {
+    background-image: radial-gradient(rgb(255 255 255 / .07) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.vignette {
+    background: radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, var(--bg) 75%, transparent));
+}
+
+/* ---------- terminal window ---------- */
+
+.desk {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gutter);
+}
+
+.window {
+    /* size in em; the font scales down so the whole window always fits the screen */
+    --width: 64;
+    --height: 48;
+    font-size: min(15px, (100vw - 2 * var(--gutter)) / var(--width), (100vh - 2 * var(--gutter)) / var(--height));
+    width: calc(var(--width) * 1em);
+    height: calc(var(--height) * 1em);
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--fg);
+    background: rgb(8 8 12 / .86);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgb(255 255 255 / .1);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgb(0 0 0 / .6), 0 0 0 1px rgb(0 0 0 / .4);
+}
+
+.titlebar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* keeps the title centred */
+    align-items: center;
+    padding: .8em 1em;
+    border-bottom: 1px solid rgb(255 255 255 / .07);
+    background: rgb(255 255 255 / .03);
+}
+
+.traffic-lights { display: flex; gap: .5em; }
+.traffic-lights span { width: .85em; height: .85em; border-radius: 50%; }
+.traffic-lights span:nth-child(1) { background: #ff5f57; }
+.traffic-lights span:nth-child(2) { background: #febc2e; }
+.traffic-lights span:nth-child(3) { background: #28c840; }
+
+.title { color: var(--muted); font-size: .9em; white-space: nowrap; }
+
+.viewport {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden auto;
+    padding: .6em 1.5em 1em;
+    line-height: 1.25;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / .2) transparent;
+}
+
+/* ---------- terminal output ---------- */
+
+.line {
+    min-height: 1.6em;
+    line-height: 1.6;
+    white-space: pre-wrap; /* long lines wrap at the edge like a real terminal */
+    word-break: break-all;
+}
+.line--dim,
+.prompt-login { opacity: .55; }
+.line.is-typing::after {
+    content: '▋';
+    margin-left: .1em;
+    animation: blink 1s steps(1) infinite;
+}
+
+.prompt-user { color: var(--prompt-user); font-weight: bold; }
+.prompt-path { color: var(--prompt-path); font-weight: bold; }
+
+/* ---------- profile ---------- */
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5em;
+}
+
+.logo {
+    margin: 0;
+    font: inherit;
+    line-height: 1;
+}
+
+.role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3em;
+    margin: .8em 0 0;
+    padding-left: .9em; /* balances the trailing letter-spacing */
+    font: inherit;
+    letter-spacing: .9em;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    max-width: 52em;
+    margin-top: .6em;
+    padding: 1em 4ch .8em;
+    box-sizing: border-box;
+}
+
+.heading {
+    margin: 0;
+    font: inherit;
+    text-align: center;
+    white-space: pre;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: 15ch max-content;
+    justify-content: center;
+    row-gap: .25em;
+    margin: 0;
+}
+.info dt { opacity: .62; }
+.info dd { margin: 0; }
+
+/* ---------- animations ---------- */
+
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes hue-shift {
+    from { filter: blur(var(--blur)) hue-rotate(-8deg); }
+    to   { filter: blur(var(--blur)) hue-rotate(8deg); }
+}
+@keyframes drift-1 {
+    from { transform: translate(-20vw, -15vh) scale(1); }
+    to   { transform: translate(25vw, 10vh) scale(1.25); }
+}
+@keyframes drift-2 {
+    from { transform: translate(30vw, 20vh) scale(1.2); }
+    to   { transform: translate(-25vw, -10vh) scale(.9); }
+}
+@keyframes drift-3 {
+    from { transform: translate(0, 30vh) scale(.9); }
+    to   { transform: translate(10vw, -30vh) scale(1.3); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora,
+    .blob { animation: none; }
+}

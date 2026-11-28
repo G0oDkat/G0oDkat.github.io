@@ -1,5 +1,6 @@
-﻿/.vs
+/.vs
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+.claude/

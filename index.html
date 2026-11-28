@@ -1,23 +1,88 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>torben.pietreck.dev</title>
-    <style>
-        :root { color-scheme: light dark; }
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            font-family: system-ui, sans-serif;
+    <title>Torben Pietreck</title>
+    <meta name="description" content="Torben Pietreck, Full-Stack Developer from Aachen.">
+    <meta name="theme-color" content="#05050a">
+    <link rel="icon" href="img/favicon-96x96.png?v=20261128" type="image/png" sizes="96x96">
+    <link rel="icon" href="img/favicon.svg?v=20261128" type="image/svg+xml">
+    <link rel="shortcut icon" href="img/favicon.ico?v=20261128">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png?v=20261128" sizes="180x180">
+    <link rel="manifest" href="img/site.webmanifest?v=20261128">
+    <link rel="stylesheet" href="css/site.css">
+    <script>
+        // Play the terminal intro unless the visitor prefers reduced motion.
+        // Set before first paint, so the profile never flashes up before the intro.
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('intro');
         }
-    </style>
+    </script>
+    <script type="module" src="js/main.js"></script>
 </head>
 <body>
-    <main>
-        <h1>Coming soon</h1>
-    </main>
+    <div class="backdrop" aria-hidden="true">
+        <div class="aurora">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        <div class="dots"></div>
+        <div class="vignette"></div>
+    </div>
+
+    <div class="desk">
+        <div class="window">
+            <div class="titlebar">
+                <div class="traffic-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="title">torben@pietreck.dev</div>
+            </div>
+
+            <div class="viewport">
+                <div id="terminal" class="terminal" aria-hidden="true"></div>
+
+                <main class="profile">
+                    <pre class="logo" role="img" aria-label="DEV">
+  ░   ░ ▒ ░     ░                     ░    ░░
+ ▒░ ▒░  ▒     ▒           ░░░  ░░░        ░░  ▒ ░  ░░   ░
+ ░░░█      █ █  ░                  ░▒    █░ ▒█        ░ ░ ▒ ░   ░ ░░  ░  ░
+ ▒  █▓▓    █▓█▓▓ ░ ░░     ▒░█ █   ▒      ██▒██▒▓ ░  ░█▒  ░░ ░   ░░      ░
+    ██████████████ ░    ░░░░████████████████████ ░▒ ██████▒░  ▒░ ░██████  ▒
+  ░░████████████████        ████████████████████▒▓▒▒██████▓▒     ░██████▓▓
+    ██████▒▒▓▓▓▓██████   ░▒ ██████▓▓▓▓▒▓▓▓▓▓▓▓▓▓▓▓  ██████▓█░░░░  ██████▓▓
+ ░░ ██████▓▓     ▓██████░   ██████▒▓ ░▒   ░ ▒   ░   ██████▓█▓▓    ██████▓▓
+   ▒██████▓▒▒   ░ ██████▓▓  ██████▒▓░ ░░            █▒██████▓▓ ░██████▓█▒▓░
+ ░▒░██████▓▓      ██████▓▓▒ ████████████████░     ░ ▓▓██████▓▓  ██████▓█▓▓
+    ██████▓▒░     ██████▒▓  ████████████████▓▓▒  ▒ ░ ▓██████▓▒ ░██████▓█▓▓
+ ▒  ██████▓▓ ░ ░░ ██████▓▓░░██████▓▓▓▒▓▓▓▓▓▓▓▒    ▒  ▒ ▓█████████████▓▓▓▒▓
+    ██████▓▓░  ░ ▒██████▓▓  ██████▒▓ ░░░░░░  ░  ░ ░ ▒  ░█████████████▓▓ ▓▓░
+ ░ ▒██████▓▓    ██████▒█▓▓░░██████▓▓  ░ ▒    ░ ░         ▓████████▓██▓▒
+  ░░████████████████▓█▓█▓▓░░████████████████████░         ████████▓██▒▓░
+ ░░ ████████████████▓▓▓█▓▓  ████████████████████▒▒       ░█▓█████▓▓█▓▓▓
+  ▒░█▓▒▓▓█▓▓▓▓▓▓▒▓▓█▒▒▓█▓▓ ░█▓███▓▓▒▓▒▓█▓█▓▒▓▓▓▓▓▓        █▓█▓▓██▓▓▓▓▓▓
+  ░░▓▓▒  ▓▒▓  ░▒  ░█▒▒ ▓▓▓  █▓▓██▓▓░   ▓▒█▒▓░          ▒ ░▓▓█▒▓▓█▓▒ ▓▓
+ ▒ ░░▒▓ ░▒▓▓   ▒░  █▒▓▒ ▓▒  █▓▓▓█▒▓░░▒ ▒▒▓▓▓              ░▒█▓▓ ▓▓▒░  ▒
+ ░ ░░░░  ░░        ▓▒▓   ▒▒ ▓▓▓░█▓▒░      ▓▓░          ░   ░█▒▓  ▓▓░
+                   ▒▓▒       ▓▓ ▓▓▓   ░   ░░             ▒░ ▓▓▒   ░▒
+                 ▒  ▒    ░     ░▒▓▒▒                      ░  ▓▓</pre>
+
+                    <h1 class="role"><span>FULL-STACK</span><span>DEVELOPER</span></h1>
+
+                    <section class="section">
+                        <h2 class="heading" aria-label="Personal info">░▒▓█  P E R S O N A L   I N F O  █▓▒░</h2>
+                        <dl class="info">
+                            <dt>Name.........:</dt><dd>Torben Pietreck</dd>
+                            <dt>Role.........:</dt><dd>Full-Stack Developer</dd>
+                            <dt>Location.....:</dt><dd>Aachen, DE</dd>
+                            <dt>Experience...:</dt><dd>10+ years</dd>
+                            <dt>Languages....:</dt><dd>German (native), English (fluent)</dd>
+                            <dt>GitHub.......:</dt><dd><a href="https://github.com/G0oDkat" target="_blank" rel="noopener">github.com/G0oDkat</a></dd>
+                        </dl>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
